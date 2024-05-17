@@ -2,16 +2,7 @@
   <div id="app">
     <SiteHeader />
     <main class="main-content">
-      <div class="button-container" data-aos="fade-up" data-aos-delay="200">
-        <button class="center-button" @click="goToLogin"> <!-- Добавляем обработчик события click -->
-          Войти
-        </button>
-        <button class="center-button" @click="fetchExcelData">
-          Загрузить расписание
-        </button>
-      </div>
-      <!-- Добавляем компонент LoginForm -->
-      <LoginForm />
+      <router-view />
     </main>
     <SiteFooter />
   </div>
@@ -21,24 +12,14 @@
 <script>
 import SiteHeader from './components/SiteHeader.vue';
 import SiteFooter from './components/SiteFooter.vue';
-import LoginForm from './components/Login.vue'; // Переименованный компонент
-import router from './router'; // Импорт объекта роутера
 
 export default {
   name: 'App',
   components: {
     SiteHeader,
     SiteFooter,
-    LoginForm // Используем новое имя компонента
   },
   methods: {
-    fetchExcelData() {
-      // Ваша логика загрузки и парсинга Excel-файла
-    },
-    goToLogin() {
-      // Вызываем метод router.push() для перехода на страницу авторизации
-      router.push('/login');
-    }
   }
 };
 </script>

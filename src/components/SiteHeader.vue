@@ -1,10 +1,12 @@
 <template>
   <header class="site-header">
-    <img src="https://pspu.ru/bitrix/templates/pggpu/logo.svg" alt="Пермский государственный гуманитарно педагогический университет" width="300" height="93">
+    <img src="https://pspu.ru/bitrix/templates/pggpu/logo.svg"
+      alt="Пермский государственный гуманитарно педагогический университет" width="300" height="93" @click="goHome()"
+      class="logo">
     <div class="right">
       <button @click="goHome">Главная</button>
-      <button @click="toggleLoginForm">Войти</button>
-      <button @click="register">Зарегистрироваться</button>
+      <button @click="goLoginPage">Войти</button>
+      <button @click="goRegisterPage">Зарегистрироваться</button>
     </div>
     <div v-if="showLoginForm" class="login-form-container">
       <form @submit.prevent="login">
@@ -23,6 +25,7 @@
 </template>
 
 <script>
+
 export default {
   name: "SiteHeader",
   data() {
@@ -34,19 +37,13 @@ export default {
   },
   methods: {
     goHome() {
-      window.location.href = '/';
+      this.$router.push('/')
     },
-    toggleLoginForm() {
-      this.showLoginForm = !this.showLoginForm;
+    goLoginPage() {
+      this.$router.push('/login')
     },
-    login() {
-      // Обработка логина
-      console.log('Логин:', this.username);
-      console.log('Пароль:', this.password);
-      // Реализуйте логику авторизации здесь
-    },
-    register() {
-      // Обработка регистрации
+    goRegisterPage() {
+      this.$router.push('/register')
     }
   }
 };
@@ -111,5 +108,9 @@ export default {
 
 .login-form-container form button:hover {
   background-color: #3e2b85;
+}
+
+.logo {
+  cursor: pointer;
 }
 </style>

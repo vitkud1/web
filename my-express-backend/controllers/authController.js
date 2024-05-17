@@ -3,14 +3,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const users = require('../models/user');
 
-const secretKey = 'web'; 
+const secretKey = 'web';
 
 // Регистрация пользователя
 exports.register = (req, res) => {
   const { username, password } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 8);
-  
+
   users.push({ username, password: hashedPassword });
+  console.log(users);
   res.status(201).json({ message: 'User registered successfully' });
 };
 
@@ -29,11 +30,11 @@ exports.login = (req, res) => {
     return res.status(401).json({ message: 'Invalid password' });
   }
 
-  const token = jwt.sign({ id: user.username }, secretKey, {
+  const accessToken = jwt.sign({ uid: user.username }, secretKey, {
     expiresIn: 86400 // 24 часа
   });
 
-  res.status(200).json({ auth: true, token });
+  res.status(200).json({ auth: true, accessToken });
 };
 
 // Проверка токена
