@@ -6,16 +6,13 @@
       <input type="password" v-model="password" placeholder="Пароль" required>
       <button type="submit">Войти</button>
     </form>
-    <div>
-      <button @click="register">Зарегистрироваться</button>
-    </div>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 export default {
-  name: 'LoginForm', // Используем новое имя компонента
+  name: 'LoginForm', 
   data() {
     return {
       username: '',

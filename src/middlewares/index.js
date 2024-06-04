@@ -17,19 +17,19 @@ instance.interceptors.request.use(
         return Promise.reject(error);
     }
 )
-// instance.interceptors.response.use(
-//     (response) => response,
-//     async (error) => {
-//         if (error.response.status == 401 && !error.config._retry) {
-//             await store.dispatch('auth/changeAccess')
+instance.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+        if (error.response.status == 401 && !error.config._retry) {
+            await store.dispatch('auth/changeAccess')
 
-//             const _request = error.config
-//             _request._retry = true
-//             _request.headers['retry'] = true
-//             return instance(_request)
-//         }
-//         return Promise.reject(error);
-//     }
-// )
+            const _request = error.config
+            _request._retry = true
+            _request.headers['retry'] = true
+            return instance(_request)
+        }
+        return Promise.reject(error);
+    }
+)
 
 export default instance

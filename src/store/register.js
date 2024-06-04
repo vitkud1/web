@@ -2,15 +2,15 @@ import router from "@/router";
 // import instance from "@/middlewares";
 
 export default {
-    name: 'auth',
+    name: 'register',
     state: () => ({
-        isAuth: false
+        isRegister: false
     }),
     getters: {
     },
     mutations: {
-        setAuth(state, isAuth) {
-            state.isAuth = isAuth
+        setRegister(state, isRegister) {
+            state.isRegister = isRegister
         }
     },
     actions: {
@@ -25,7 +25,7 @@ export default {
             })
             if (response?.status == 401 || response?.status == 404 || response?.status == 403) {
                 window.alert('Неверный username или пароль')
-            } else if (response?.status == 429) { //anti trottle
+            } else if (response?.status == 429) { 
                 window.alert('Слишком много запросов. Попробуйте позже')
             } else {
                 await response.json()

@@ -7,6 +7,7 @@
       <button @click="goHome">Главная</button>
       <button @click="goLoginPage">Войти</button>
       <button @click="goRegisterPage">Зарегистрироваться</button>
+      <button @click="goAdminPage">Сотрудник УМУ</button>
     </div>
     <div v-if="showLoginForm" class="login-form-container">
       <form @submit.prevent="login">
@@ -44,6 +45,9 @@ export default {
     },
     goRegisterPage() {
       this.$router.push('/register')
+    },
+    goAdminPage() {
+      this.$router.push('/admin')
     }
   }
 };

@@ -4,14 +4,14 @@ import instance from "@/middlewares";
 export default {
     name: 'data',
     state: () => ({
-        // isAuth: false
+        isRegister: false
     }),
     getters: {
     },
     mutations: {
-        // setAuth(state, isAuth) {
-        //     state.isAuth = isAuth
-        // }
+        setRegister(state, isRegister) {
+            state.isRegister = isRegister
+        }
     },
     actions: {
         async getStudentByUid({ commit }) {
