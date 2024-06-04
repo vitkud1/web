@@ -1,39 +1,56 @@
 <template>
-  <div class="admin-container">
+  <div class="admin-page">
     <h1>Админская страница</h1>
-    <AdminForm @add-row="addRow" />
-    <vue-good-table :columns="columns" :rows="rows" :paginate="true" :lineNumbers="true" :globalSearch="true"
-      @on-row-click="onRowClick" />
+    <AdminForm @add-row="addRow"/>
+    <vue-good-table
+      :columns="columns"
+      :rows="rows"
+      :paginate="true"
+      :lineNumbers="true"
+      :globalSearch="true"
+      @on-row-click="onRowClick"
+    />
   </div>
 </template>
 
 <script>
-import AdminForm from '../components/AdminForm.vue';
-// import { VueGoodTable } from 'vue-good-table';
+import axios from 'axios';
+import AdminForm from '@/components/AdminForm.vue';
+import { VueGoodTable } from 'vue-good-table';
 // import 'vue-good-table/dist/vue-good-table.css';
 
 export default {
   components: {
     AdminForm,
-    // VueGoodTable
+    VueGoodTable
   },
   data() {
     return {
       columns: [
-        { label: 'ID', field: 'id', type: 'number', editable: true },
         { label: 'Имя', field: 'name', editable: true },
-        { label: 'Email', field: 'email', editable: true },
-        { label: 'Телефон', field: 'phone', editable: true }
+        { label: 'Фамилия', field: 'surname', editable: true }
       ],
-      rows: [
-        { id: 1, name: 'Иван Иванов', email: 'ivan@example.com', phone: '1234567890' },
-        { id: 2, name: 'Петр Петров', email: 'petr@example.com', phone: '0987654321' }
-      ]
     };
   },
+  created() {
+    this.fetchRows();
+  },
   methods: {
-    addRow(newRow) {
-      this.rows.push(newRow);
+    async fetchRows() {
+      try {
+        const response = await axios.get('http://localhost:3000/api/users/get-users');
+        this.rows = response.data;
+      } catch (error) {
+        console.error('Ошибка при загрузке данных:', error);
+      }
+    },
+    async addRow(newRow) {
+      try {
+        const response = await axios.post('http://localhost:3000/api/users/add-user', newRow);
+        this.rows.push(response.data);
+      } catch (error) {
+        console.error('Ошибка при добавлении данных:', error);
+      }
     },
     onRowClick(params) {
       console.log('Row clicked', params.row);

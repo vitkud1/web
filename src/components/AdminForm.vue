@@ -2,7 +2,6 @@
     <div class="admin-container">
       <h2>Добавить новую запись</h2>
       <form @submit.prevent="handleSubmit">
-        <input type="number" v-model="newRow.id" placeholder="ID" required>
         <input type="text" v-model="newRow.name" placeholder="Имя" required>
         <input type="email" v-model="newRow.email" placeholder="Email" required>
         <input type="text" v-model="newRow.phone" placeholder="Телефон" required>
@@ -16,7 +15,6 @@
     data() {
       return {
         newRow: {
-          id: '',
           name: '',
           email: '',
           phone: ''
@@ -27,7 +25,6 @@
       handleSubmit() {
         this.$emit('add-row', { ...this.newRow });
         this.newRow = {
-          id: '',
           name: '',
           email: '',
           phone: ''

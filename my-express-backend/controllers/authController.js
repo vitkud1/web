@@ -1,7 +1,7 @@
 // controllers/authController.js
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const users = require('../models/user');
+const users = require('../models/users');
 
 const secretKey = 'web';
 
@@ -37,7 +37,7 @@ exports.login = (req, res) => {
   res.status(200).json({ auth: true, accessToken });
 };
 
-// Проверка токена
+
 exports.verifyToken = (req, res, next) => {
   const token = req.headers['x-access-token'];
 
