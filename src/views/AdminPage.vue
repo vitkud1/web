@@ -1,6 +1,6 @@
 <template>
   <div class="admin-page">
-    <h1>Админская страница</h1>
+    <h1>Добавление чего-то...</h1>
     <AdminForm @add-row="addRow"/>
     <vue-good-table
       :columns="columns"
@@ -17,7 +17,7 @@
 import axios from 'axios';
 import AdminForm from '@/components/AdminForm.vue';
 import { VueGoodTable } from 'vue-good-table';
-// import 'vue-good-table/dist/vue-good-table.css';
+import 'vue-good-table/dist/vue-good-table.css';
 
 export default {
   components: {
@@ -27,9 +27,11 @@ export default {
   data() {
     return {
       columns: [
-        { label: 'Имя', field: 'name', editable: true },
-        { label: 'Фамилия', field: 'surname', editable: true }
+        { label: 'Имя', field: 'username', editable: true },
+        { label: 'email', field: 'email', editable: true },
+        // { label: 'email', field: 'email', editable: true }
       ],
+      rows: [] 
     };
   },
   created() {
@@ -39,7 +41,7 @@ export default {
     async fetchRows() {
       try {
         const response = await axios.get('http://localhost:3000/api/users/get-users');
-        this.rows = response.data;
+        this.rows = response.data; 
       } catch (error) {
         console.error('Ошибка при загрузке данных:', error);
       }
@@ -47,7 +49,7 @@ export default {
     async addRow(newRow) {
       try {
         const response = await axios.post('http://localhost:3000/api/users/add-user', newRow);
-        this.rows.push(response.data);
+        this.rows.push(response.data); 
       } catch (error) {
         console.error('Ошибка при добавлении данных:', error);
       }

@@ -10,8 +10,8 @@
   
   export default {
     methods: {
-      fetchExcelData() {
-        axios.get('https://docs.google.com/spreadsheets/d/1_fsm-OxH9E9LgHnLC0iju5OlaHIv0agmM87GLvRKIAg/edit#gid=0', { responseType: 'arraybuffer' })
+      async fetchExcelData() {
+        await axios.get('https://docs.google.com/spreadsheets/d/1_fsm-OxH9E9LgHnLC0iju5OlaHIv0agmM87GLvRKIAg/edit#gid=1591874107', { responseType: 'arraybuffer' })
           .then(response => {
             this.parseExcelData(response.data);
           })
@@ -20,6 +20,7 @@
           });
       },
       parseExcelData(data) {
+        // console.log(data);
         const workbook = XLSX.read(data, { type: 'array' });
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];

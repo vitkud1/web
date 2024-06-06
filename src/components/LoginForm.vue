@@ -5,11 +5,13 @@
       <input type="text" v-model="username" placeholder="Логин" required>
       <input type="password" v-model="password" placeholder="Пароль" required>
       <button type="submit">Войти</button>
+      <ExcelParser />
     </form>
   </div>
 </template>
 
 <script>
+import ExcelParser from './ExcelParser.vue';
 import { mapActions } from 'vuex';
 export default {
   name: 'LoginForm', 
@@ -31,6 +33,9 @@ export default {
 
       this.getlogin(formData)
     }
+  },
+  components: {
+    ExcelParser
   }
 };
 </script>

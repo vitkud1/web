@@ -1,7 +1,7 @@
 const { sequelize } = require('../connection.js')
 const { DataTypes } = require('sequelize');
 
-const classroom = sequelize.define(
+const classrooms = sequelize.define(
   'classrooms',
   {
     id: {
@@ -17,12 +17,12 @@ const classroom = sequelize.define(
     },
   },
   {
-    tableName: 'classroom',
+    tableName: 'classrooms',
     timestamps: false,
 
   }
 )
-async function get_classroom_table() {
+async function get_classrooms_table() {
   await classrooms.sync()
   console.log('синхр ок');
 }
