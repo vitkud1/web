@@ -5,6 +5,8 @@ import RegisterPage from '../views/RegisterPage.vue'
 import UserPage from '../views/UserPage.vue';
 import AdminPage from '../views/AdminPage.vue'
 import instance from '../middlewares'
+import ExcelParser from '@/components/ExcelParser.vue';
+import DataView from '@/components/DataView.vue';
 
 const routes = [
     {
@@ -31,7 +33,18 @@ const routes = [
         path: '/userpage',
         name: 'userpage',
         component: UserPage
-    }
+    },
+        {
+          path: '/',
+          name: 'excel-parser',
+          component: ExcelParser
+        },
+    {
+        path: '/data-view',
+        name: 'data-view',
+        component: DataView,
+        props: true // Передаем параметры в компонент
+      }
 ]
 
 const router = createRouter({
@@ -57,22 +70,5 @@ router.beforeEach(async (to, from, next) => {
         next();
     }
 });
-    // const uid = localStorage.getItem('uid')
-    // const requireAuth = to.matched.some(record => record?.meta.auth)
-
-    // if (requireAuth) {
-    //     await instance.get(`/api/auth/me`)
-    //         .then((res) => {
-    //             next()
-    //         })
-    //         .catch((err) => {
-    //             if (err.response.status == 403 || err.response.status == 401) {
-    //                 next('/login')
-    //             }
-    //         })
-    // } else {
-    //     next()
-    // }
-// })
 
 export default router
